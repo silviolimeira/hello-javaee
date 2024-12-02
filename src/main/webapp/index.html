@@ -4,7 +4,13 @@
         <title>Start Page</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
-    <body>
+    <body ng-app="HelpApp">
         <h1>Hello World!</h1>
+        <div ng-controller="CallController as controller">
+            Olá  {{ controller.user }}<br />
+            1 + 2 = {{1 + 2}}
+        </div>
+        <script src="angular.js"></script>
+        <script src="help.js"></script>
     </body>
 </html>

@@ -2,10 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.sl.callcenter.backend.controllers;
+package com.sl.hello.backend.controllers;
 
-import com.sl.callcenter.backend.entities.Call;
-import com.sl.callcenter.backend.entities.Status;
+import com.sl.hello.backend.entities.Call;
+import com.sl.hello.backend.entities.Status;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
