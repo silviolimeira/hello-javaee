@@ -1,2 +1,19 @@
 
 
+
+AngularJS #1 - Introdução e Hello World - Rodrigo Branas
+ref:
+https://www.youtube.com/watch?v=_y7rKxqPoyg&list=PLQCmSnNFVYnTD5p2fR4EXmtlR6jQJMbPb
+
+https://www.youtube.com/playlist?list=PLQCmSnNFVYnTD5p2fR4EXmtlR6jQJMbPb
+
+
+
+JAVA - #9 - Integrando o JAVA com o AngularJS (Frontend + Backend) - Parte 2 - Português BR
+ref:
+https://www.youtube.com/watch?v=Z8cxNW3PgYo&list=PL1NdiP2jsLnuEqNkOF7-ISTciRrKd51Hv&index=9
+
+
+
+
+ã

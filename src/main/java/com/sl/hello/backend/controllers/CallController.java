@@ -4,6 +4,7 @@
  */
 package com.sl.hello.backend.controllers;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sl.hello.backend.entities.Call;
 import com.sl.hello.backend.entities.Status;
 import jakarta.ws.rs.Consumes;
@@ -22,6 +23,7 @@ import java.util.List;
  *
  * @author sicemal
  */
+@JsonIgnoreProperties
 @Path("calls")
 public class CallController {
     
@@ -53,7 +55,7 @@ public class CallController {
     @Consumes(MediaType.APPLICATION_JSON)        
     @Path("/")
     public Response create(Call call) {
-        System.out.println(call);
+        System.out.println("POST: " + call);
         return Response.status(Response.Status.CREATED).build();
     }
     

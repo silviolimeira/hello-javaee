@@ -5,10 +5,57 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
     <body ng-app="HelpApp">
-        <h1>Hello World!</h1>
         <div ng-controller="CallController as controller">
-            Olá  {{ controller.user }}<br />
-            1 + 2 = {{1 + 2}}
+            <h1>HELP APP</h1>
+            <h5>Olá {{ controller.user }}</h5>        
+            <h5>{{ 2 + 2}} = {{ 3 + 2 }} </h5>
+            <div style="border: 1px solid black;"
+                 data-ng-show="controller.call">
+                <label for="callId">ID:</label>
+                <input type="number"
+                       id="callId"
+                       data-ng-model="controller.call.id"
+                       disabled><br>
+                
+                <label for="issue">Assunto:</label>
+                <input type="text"
+                       id="issue"
+                       data-ng-model="controller.call.issue"><br>
+                
+                <label for="issue">Mensagem:</label>
+                <textarea rows="4"
+                       id="message"
+                       data-ng-model="controller.call.message"></textarea><br>
+                
+                <button type="button" data-ng-click="controller.save()">Salvar</button>
+                <button type="button" data-ng-click="controller.call = undefined">Cancel</button>
+                
+            </div>
+            <div style="border: 1px solid black;" data-ng-show="!controller.call">
+                <button type="button" data-ng-click="controller.new()">Novo Chamado</button><br> 
+                <br> 
+                <table border="1">
+                    <tr>
+                        <th>ID</th>
+                        <th>Assunto</th>
+                        <th>Mensagem</th>
+                        <th>Opções</th>
+                    </tr>
+                    <tr data-ng-repeat="call in controller.calls">
+                        <td>{{call.id}}</td>
+                        <td>{{call.issue}}</td>
+                        <td>{{call.message}}</td>
+                        <td>
+                            <button type="button" data-ng-click="controller.edit(call)">Alterar</button>
+                            <button type="button" data-ng-click="controller.delete(call)">Excluir</button>
+                            <button type="button" data-ng-click="controller.conclude(call)">Concluir</button>
+                        </td>
+                    </tr>
+                </table>
+                
+            </div>
+            
+            
         </div>
         <script src="angular.js"></script>
         <script src="help.js"></script>

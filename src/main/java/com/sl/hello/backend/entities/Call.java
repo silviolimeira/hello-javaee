@@ -15,12 +15,21 @@ public class Call {
     private String message;
     private Status status;
 
+    public Call() {}
+    
     public Call(long id, String issue, String message, Status status) {
         this.id = id;
         this.issue = issue;
         this.message = message;
         this.status = status;
     }
+    
+    public Call(String issue, String message) {
+        this.issue = issue;
+        this.message = message;
+        this.status = Status.NEW;
+    }
+    
     
     public long getId() {
         return id;
