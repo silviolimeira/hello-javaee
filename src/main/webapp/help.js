@@ -57,7 +57,7 @@ angular.module("HelpApp", [])
       self.call = call;
       
       $http({
-          method: 'POST',
+          method: 'PUT',
           url: urlBase + 'calls/' + self.call.id + "/"
       }).then(function successCallback(response) {
           self.updateTable();
