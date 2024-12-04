@@ -6,8 +6,8 @@ package com.sl.hello.backend.controllers;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sl.hello.backend.entities.Call;
-import com.sl.hello.backend.entities.CallDAO;
-import com.sl.hello.backend.entities.Status;
+import com.sl.callcenter.backend.jdbc.dao.CallDAO;
+import com.sl.callcenter.backend.enumerados.call.Status;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;

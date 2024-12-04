@@ -2,8 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.sl.hello.backend.entities;
+package com.sl.callcenter.backend.jdbc.dao;
 
+import com.sl.hello.backend.entities.Call;
+import com.sl.callcenter.backend.enumerados.call.Status;
 import com.sl.hello.backend.infra.ConexaoJDBC;
 import com.sl.hello.backend.infra.ConexaoPostgresJDBC;
 import java.sql.PreparedStatement;

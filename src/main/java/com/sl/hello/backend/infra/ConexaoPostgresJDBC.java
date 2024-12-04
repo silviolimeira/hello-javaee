@@ -26,7 +26,7 @@ public class ConexaoPostgresJDBC implements ConexaoJDBC {
         properties.put("user", "postgres");
         properties.put("password", "postgres");
         
-        this.connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/mydb", properties);
+        this.connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/mydb?Applicationname=HelpMe", properties);
         this.connection.setAutoCommit(false);
         
     }
