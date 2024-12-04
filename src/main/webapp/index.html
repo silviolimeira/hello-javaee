@@ -38,17 +38,21 @@
                     <tr>
                         <th>ID</th>
                         <th>Assunto</th>
+                        <th>Status</th>
                         <th>Mensagem</th>
                         <th>Opções</th>
                     </tr>
                     <tr data-ng-repeat="call in controller.calls">
                         <td>{{call.id}}</td>
                         <td>{{call.issue}}</td>
+                        <td>{{call.status}}</td>
                         <td>{{call.message}}</td>
                         <td>
                             <button type="button" data-ng-click="controller.edit(call)">Alterar</button>
                             <button type="button" data-ng-click="controller.delete(call)">Excluir</button>
-                            <button type="button" data-ng-click="controller.conclude(call)">Concluir</button>
+                            <button type="button" 
+                                    data-ng-show="call.status !== 'CLOSED'"
+                                    data-ng-click="controller.conclude(call)">Concluir</button>
                         </td>
                     </tr>
                 </table>

@@ -6,6 +6,7 @@ package com.sl.hello.backend.controllers;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sl.hello.backend.entities.Call;
+import com.sl.hello.backend.entities.CallDAO;
 import com.sl.hello.backend.entities.Status;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
@@ -15,9 +16,13 @@ import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.WebApplicationException;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -30,48 +35,89 @@ public class CallController {
     @GET
     @Produces(MediaType.APPLICATION_JSON)        
     @Path("/")
-    public Response list() {
-
-        List<Call> list = List.of(
-            new Call(1,"Assunto1", "Mensagem 1", Status.NEW),
-            new Call(2,"Assunto2", "Mensagem 2", Status.NEW),
-            new Call(3,"Assunto3", "Mensagem 4", Status.CLOSED),
-            new Call(4,"Assunto4", "Mensagem 4", Status.PENDING),
-            new Call(5,"Assunto5", "Mensagem 5", Status.PENDING)
-        );
-        return  Response.ok(list).build();
+    public Response list() throws SQLException {
+        try {
+            CallDAO callDAO = new CallDAO();
+            return Response.ok(callDAO.list()).build();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(CallController.class.getCanonicalName()).log(Level.SEVERE, null, ex);
+            throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
+        }
     }
     
     @GET
     @Produces(MediaType.APPLICATION_JSON)        
     @Path("{id}/")
     public Response get(@PathParam("id") long id) {
-
-        Call call = new Call(1,"Assunto " + id, "Mensagem " + id, Status.NEW);
-        return  Response.ok(call).build();
+        try {
+            CallDAO callDAO = new CallDAO();
+            return Response.ok(callDAO.select(id)).build();
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(CallController.class.getCanonicalName()).log(Level.SEVERE, null, ex);
+            throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
+        }
     }
     
     @POST
     @Consumes(MediaType.APPLICATION_JSON)        
     @Path("/")
     public Response create(Call call) {
-        System.out.println("POST: " + call);
-        return Response.status(Response.Status.CREATED).build();
+        try {
+            call.setStatus(Status.NEW);
+            CallDAO callDAO = new CallDAO();
+            callDAO.insert(call);
+            return Response.status(Response.Status.CREATED).build();
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(CallController.class.getCanonicalName()).log(Level.SEVERE, null, ex);
+            throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
+        }
     }
     
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)        
     @Path("/")
     public Response update(Call call) {
-        System.out.println(call);
-        return Response.status(Response.Status.NO_CONTENT).build();
+        try {
+            call.setStatus(Status.PENDING);
+            CallDAO callDAO = new CallDAO();
+            callDAO.update(call);
+            return Response.status(Response.Status.NO_CONTENT).build();
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(CallController.class.getCanonicalName()).log(Level.SEVERE, null, ex);
+            throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
+        }
     }
     
     @DELETE
     @Path("{id}/")
     public Response delete(@PathParam("id") long id) {
-        System.out.println("Deletando ID: " + id);
-        return Response.status(Response.Status.NO_CONTENT).build();
+        try {
+            CallDAO callDAO = new CallDAO();
+            callDAO.delete(id);
+            return Response.status(Response.Status.NO_CONTENT).build();
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(CallController.class.getCanonicalName()).log(Level.SEVERE, null, ex);
+            throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
+        }
+    }
+    
+    @PUT
+    @Consumes(MediaType.APPLICATION_JSON)        
+    @Path("{id}/")
+    public Response closed(@PathParam("id") long id) throws SQLException {
+        try {
+            CallDAO callDAO = new CallDAO();
+            
+            Call c = callDAO.select(id);
+            c.setStatus(Status.CLOSED);
+            
+            callDAO.update(c);
+            
+            return Response.status(Response.Status.NO_CONTENT).build();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(CallController.class.getCanonicalName()).log(Level.SEVERE, null, ex);
+            throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
+        }
     }
     
     

@@ -1,10 +1,12 @@
 angular.module("HelpApp", [])
     .value('urlBase', 'http://localhost:8080/callcenter/rest/')
     .controller("CallController", function($http, urlBase) {
-  var self = this;
-  self.user = 'Silvio 458 !';
-  self.call = undefined;
-  self.save = function() {
+    
+    var self = this;
+    self.user = 'Silvio 458 !';
+    self.call = undefined;
+  
+    self.save = function() {
       var method = 'POST';
       if (self.call.id) {
           method = 'PUT'
@@ -29,14 +31,18 @@ angular.module("HelpApp", [])
           self.catchError();
       });
   }
+  
   self.new = function() {
       self.call = {};
       
   }
+  
   calls = [];
+  
   self.edit = function(call) {
       self.call = call;
   }
+  
   self.delete = function(call) {
       self.call = call;
       $http({method: 'DELETE', url: urlBase + 'calls/' + self.call.id + "/"
@@ -46,9 +52,20 @@ angular.module("HelpApp", [])
           self.catchError();
       });
   }
-  self.conclude = function() {
-      alert("TO DO");
+  
+  self.conclude = function(call) {
+      self.call = call;
+      
+      $http({
+          method: 'POST',
+          url: urlBase + 'calls/' + self.call.id + "/"
+      }).then(function successCallback(response) {
+          self.updateTable();
+      }, function errorCallBack(response) {
+          self.catchError();
+      });
   }
+  
   self.catchError = function() {
       alert("Ocorreu um erro!");
   }

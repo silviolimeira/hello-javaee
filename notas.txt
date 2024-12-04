@@ -16,4 +16,7 @@ https://www.youtube.com/watch?v=Z8cxNW3PgYo&list=PL1NdiP2jsLnuEqNkOF7-ISTciRrKd5
 
 
 
-ã
+potgres:
+database: mydb
+user: postgres  
+password: postgres
