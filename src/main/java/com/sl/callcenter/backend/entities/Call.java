@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.sl.hello.backend.entities;
+package com.sl.callcenter.backend.entities;
 
 import com.sl.callcenter.backend.enumerados.call.Status;
 import com.sl.callcenter.backend.enumerados.call.Type;
@@ -26,7 +26,7 @@ import java.util.Date;
  * @author sicemaḉl
  */
 @Entity
-@Table(name = "sl_call1")
+@Table(name = "sl_call")
 public class Call implements Serializable {
    
     @Id

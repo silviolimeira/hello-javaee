@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.sl.hello.backend.infra;
+package com.sl.callcenter.backend.infra;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;

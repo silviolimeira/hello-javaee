@@ -4,10 +4,10 @@
  */
 package com.sl.callcenter.backend.jdbc.dao;
 
-import com.sl.hello.backend.entities.Call;
+import com.sl.callcenter.backend.entities.Call;
 import com.sl.callcenter.backend.enumerados.call.Status;
-import com.sl.hello.backend.infra.ConexaoJDBC;
-import com.sl.hello.backend.infra.ConexaoPostgresJDBC;
+import com.sl.callcenter.backend.infra.ConexaoJDBC;
+import com.sl.callcenter.backend.infra.ConexaoPostgresJDBC;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;

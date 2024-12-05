@@ -2,11 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.sl.hello.backend.controllers;
+package com.sl.callcenter.backend.controllers;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.sl.hello.backend.entities.Call;
-import com.sl.callcenter.backend.jdbc.dao.CallDAO;
+import com.sl.callcenter.backend.business.CallBus;
+import com.sl.callcenter.backend.entities.Call;
 import com.sl.callcenter.backend.enumerados.call.Status;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
@@ -20,7 +20,6 @@ import jakarta.ws.rs.WebApplicationException;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import java.sql.SQLException;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -37,9 +36,9 @@ public class CallController {
     @Path("/")
     public Response list() throws SQLException {
         try {
-            CallDAO callDAO = new CallDAO();
-            return Response.ok(callDAO.list()).build();
-        } catch (ClassNotFoundException ex) {
+            CallBus callBus = new CallBus();
+            return Response.ok(callBus.list()).build();
+        } catch (Exception ex) {
             Logger.getLogger(CallController.class.getCanonicalName()).log(Level.SEVERE, null, ex);
             throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
         }
@@ -50,9 +49,9 @@ public class CallController {
     @Path("{id}/")
     public Response get(@PathParam("id") long id) {
         try {
-            CallDAO callDAO = new CallDAO();
-            return Response.ok(callDAO.select(id)).build();
-        } catch (SQLException | ClassNotFoundException ex) {
+            CallBus callBus = new CallBus();
+            return Response.ok(callBus.select(id)).build();
+        } catch (Exception ex) {
             Logger.getLogger(CallController.class.getCanonicalName()).log(Level.SEVERE, null, ex);
             throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
         }
@@ -63,11 +62,10 @@ public class CallController {
     @Path("/")
     public Response create(Call call) {
         try {
-            call.setStatus(Status.NEW);
-            CallDAO callDAO = new CallDAO();
-            callDAO.insert(call);
+            CallBus callBus = new CallBus();
+            callBus.insert(call);
             return Response.status(Response.Status.CREATED).build();
-        } catch (SQLException | ClassNotFoundException ex) {
+        } catch (Exception ex) {
             Logger.getLogger(CallController.class.getCanonicalName()).log(Level.SEVERE, null, ex);
             throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
         }
@@ -79,10 +77,10 @@ public class CallController {
     public Response update(Call call) {
         try {
             call.setStatus(Status.PENDING);
-            CallDAO callDAO = new CallDAO();
-            callDAO.update(call);
+            CallBus callBus = new CallBus();
+            callBus.update(call);
             return Response.status(Response.Status.NO_CONTENT).build();
-        } catch (SQLException | ClassNotFoundException ex) {
+        } catch (Exception ex) {
             Logger.getLogger(CallController.class.getCanonicalName()).log(Level.SEVERE, null, ex);
             throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
         }
@@ -92,10 +90,10 @@ public class CallController {
     @Path("{id}/")
     public Response delete(@PathParam("id") long id) {
         try {
-            CallDAO callDAO = new CallDAO();
-            callDAO.delete(id);
+            CallBus callBus = new CallBus();
+            callBus.delete(id);
             return Response.status(Response.Status.NO_CONTENT).build();
-        } catch (SQLException | ClassNotFoundException ex) {
+        } catch (Exception ex) {
             Logger.getLogger(CallController.class.getCanonicalName()).log(Level.SEVERE, null, ex);
             throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
         }
@@ -106,15 +104,15 @@ public class CallController {
     @Path("{id}/")
     public Response closed(@PathParam("id") long id) throws SQLException {
         try {
-            CallDAO callDAO = new CallDAO();
+            CallBus callBus = new CallBus();
             
-            Call c = callDAO.select(id);
+            Call c = callBus.select(id);
             c.setStatus(Status.CLOSED);
             
-            callDAO.update(c);
+            callBus.update(c);
             
             return Response.status(Response.Status.NO_CONTENT).build();
-        } catch (ClassNotFoundException ex) {
+        } catch (Exception ex) {
             Logger.getLogger(CallController.class.getCanonicalName()).log(Level.SEVERE, null, ex);
             throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
         }

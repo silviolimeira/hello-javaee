@@ -15,6 +15,6 @@ import org.glassfish.jersey.server.ResourceConfig;
 public class MyApplication extends ResourceConfig {
 
     public MyApplication() {
-        packages(true, "com.sl.help.backend.controllers");
+        packages(true, "com.sl.callcenter.backend.controllers");
     }
 }
