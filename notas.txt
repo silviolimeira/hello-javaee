@@ -1,4 +1,11 @@
 
+Repository:
+** https://github.com/silviolimeira/hello-javaee
+https://bitbucket.org/silviolimeira/hello-java/src/main/
+
+## Git Annotations
+$ git remote add origin git@bitbucket.org:silviolimeira/hello-java.git
+$ git remote set-url origin git@bitbucket.org:silviolimeira/hello-java.git
 
 
 AngularJS #1 - Introdução e Hello World - Rodrigo Branas
