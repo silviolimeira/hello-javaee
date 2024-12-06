@@ -14,6 +14,9 @@ ref:
 https://www.youtube.com/watch?v=Z8cxNW3PgYo&list=PL1NdiP2jsLnuEqNkOF7-ISTciRrKd51Hv&index=9
 
 
+IntelliJ IDEA Tutorial: Running and Debugging Java Web Apps in Tomcat
+ref:
+https://www.youtube.com/watch?v=ijnvlVubqsE
 
 
 potgres:
